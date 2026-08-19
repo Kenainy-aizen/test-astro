@@ -1,4 +1,7 @@
 ---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
 const pageTitle = "À propos de moi";
 
 const identity = {
@@ -13,6 +16,9 @@ const skills = ["HTML", "CSS", "JavaScript", "Astro", "React", "redaction de doc
 const happy = true;
 const finished = false;
 const goal = 3;
+const skillColor = "crimson";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 <!DOCTYPE html>
@@ -22,11 +28,21 @@ const goal = 3;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{pageTitle}</title>
     <!-- <link href="css/style.css" rel="stylesheet"> -->
+<style define:vars={{skillColor, fontWeight, textCase}}>
+  h1 {
+    color: purple;
+    font-size: 4rem;
+  }
+  .skill {
+    color: var(--skillColor);
+    font-weight: var(--fontWeight);
+    text-transform: var(--textCase);
+  }
+</style>
+
   </head>
   <body>
-    <a href="/">Accueil</a>
-    <a href="/about/">À propos</a>
-    <a href="/blog/">Blog</a>
+    <Header/>
     <h1>{pageTitle}</h1>
     <h2>... et de mon nouveau site Astro !</h2>
     <p>Je suis en train de suivre le tutoriel d'introduction d'Astro. C'est la deuxième page de mon site web, et c'est la première que j'ai construite moi-même !</p>
@@ -43,7 +59,7 @@ const goal = 3;
     </ul>
     <p>Voici mes compétences :</p>
     <ul>
-      {skills.map((skill) => <li>{skill}</li>)}
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
     </ul>
 
     {happy && <p>Je suis heureux d'apprendre Astro !</p>}
@@ -51,6 +67,8 @@ const goal = 3;
     {finished && <p>J'ai terminé ce tutoriel !</p>}
 
     {goal === 3 ? <p>Mon objectif est de terminer en 3 jours.</p> : <p>Mon objectif n'est pas de 3 jours.</p>}
-    
+
+    <Footer/>
+
   </body>
 </html>
